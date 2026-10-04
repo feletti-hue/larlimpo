@@ -1,636 +1,402 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LarLimpo | Serviços de Limpeza Residencial</title>
-  <meta name="description" content="Serviços profissionais de limpeza residencial. Agende online e deixe sua casa brilhando.">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: {
-              50: '#f0fdfa',
-              100: '#ccfbf1',
-              200: '#99f6e4',
-              300: '#5eead4',
-              400: '#2dd4bf',
-              500: '#14b8a6',
-              600: '#0d9488',
-              700: '#0f766e',
-              800: '#115e59',
-              900: '#134e4a',
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          }
-        }
-      }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LarLimpo | Limpeza Residencial Profissional</title>
+<meta name="description" content="LarLimpo — limpeza residencial profissional. Agende pelo WhatsApp. Limpeza padrão, profunda, pós-obra, estofados e planos recorrentes. Preços a partir de R$ 120.">
+<meta property="og:title" content="LarLimpo — Limpeza Residencial">
+<meta property="og:description" content="Sua casa limpa, sem dor de cabeça. Agende em minutos pelo WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: { 50:'#f0fdfa', 100:'#ccfbf1', 200:'#99f6e4', 300:'#5eead4', 400:'#2dd4bf', 500:'#14b8a6', 600:'#0d9488', 700:'#0f766e', 800:'#115e59', 900:'#134e4a' }
+      },
+      fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
     }
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    html { scroll-behavior: smooth; }
-    .hero-gradient {
-      background: linear-gradient(135deg, #0f766e 0%, #14b8a6 50%, #2dd4bf 100%);
-    }
-    .card-hover {
-      transition: all 0.3s ease;
-    }
-    .card-hover:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    }
-    .service-icon {
-      width: 64px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 16px;
-      font-size: 1.75rem;
-    }
-  </style>
+  }
+}
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: Inter, system-ui, sans-serif; }
+  .hero-bg {
+    background:
+      radial-gradient(900px 400px at 85% -5%, rgba(13,148,136,.22), transparent 55%),
+      radial-gradient(700px 350px at -5% 100%, rgba(13,148,136,.12), transparent 50%),
+      #fff;
+  }
+  .card { transition: transform .25s ease, box-shadow .25s ease; }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(15,23,42,.08); }
+  .check li { position: relative; padding-left: 1.6rem; margin: .55rem 0; }
+  .check li::before { content: "✓"; position: absolute; left: 0; color: #0d9488; font-weight: 800; }
+  details summary { list-style: none; cursor: pointer; }
+  details summary::-webkit-details-marker { display: none; }
+  .sticky-cta {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    background: rgba(255,255,255,.95); backdrop-filter: blur(12px);
+    border-top: 1px solid #e2e8f0; padding: 10px 16px;
+    display: none;
+  }
+  @media (max-width: 767px) { .sticky-cta { display: block; } body { padding-bottom: 72px; } }
+</style>
 </head>
-<body class="font-sans text-gray-800 bg-gray-50">
+<body class="bg-white text-slate-900">
 
-  <!-- Navbar -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <a href="#inicio" class="flex items-center gap-2">
-          <div class="w-10 h-10 bg-primary-600 rounded-xl flex items-center justify-center">
-            <i class="fas fa-broom text-white text-lg"></i>
-          </div>
-          <span class="text-xl font-bold text-primary-800">Lar<span class="text-primary-500">Limpo</span></span>
-        </a>
-
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex items-center gap-8">
-          <a href="#servicos" class="text-gray-600 hover:text-primary-600 font-medium transition">Serviços</a>
-          <a href="#planos" class="text-gray-600 hover:text-primary-600 font-medium transition">Planos</a>
-          <a href="#como-funciona" class="text-gray-600 hover:text-primary-600 font-medium transition">Como Funciona</a>
-          <a href="#depoimentos" class="text-gray-600 hover:text-primary-600 font-medium transition">Depoimentos</a>
-          <a href="#agendar" class="bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-full font-semibold transition shadow-md hover:shadow-lg">
-            Agendar Agora
-          </a>
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <button id="menuBtn" class="md:hidden p-2 text-gray-600 hover:text-primary-600">
-          <i class="fas fa-bars text-xl"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
-      <div class="px-4 py-4 space-y-3">
-        <a href="#servicos" class="block py-2 text-gray-600 hover:text-primary-600 font-medium">Serviços</a>
-        <a href="#planos" class="block py-2 text-gray-600 hover:text-primary-600 font-medium">Planos</a>
-        <a href="#como-funciona" class="block py-2 text-gray-600 hover:text-primary-600 font-medium">Como Funciona</a>
-        <a href="#depoimentos" class="block py-2 text-gray-600 hover:text-primary-600 font-medium">Depoimentos</a>
-        <a href="#agendar" class="block w-full text-center bg-primary-600 text-white py-3 rounded-full font-semibold mt-2">Agendar Agora</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section id="inicio" class="hero-gradient pt-28 pb-20 md:pt-36 md:pb-28 text-white relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-      <div class="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-    </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <span class="inline-block bg-white/20 backdrop-blur-sm text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-            ✨ Limpeza profissional com qualidade garantida
-          </span>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-            Sua casa limpa,<br>
-            <span class="text-primary-100">você tranquilo</span>
-          </h1>
-          <p class="text-lg md:text-xl text-white/90 mb-8 max-w-lg">
-            Serviços de limpeza residencial com profissionais treinados, produtos ecológicos e agendamento fácil. Deixe o trabalho pesado conosco!
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="#agendar" class="bg-white text-primary-700 hover:bg-primary-50 px-8 py-3.5 rounded-full font-bold text-center transition shadow-lg">
-              Agendar Limpeza
-            </a>
-            <a href="#servicos" class="border-2 border-white/60 hover:bg-white/10 px-8 py-3.5 rounded-full font-semibold text-center transition">
-              Ver Serviços
-            </a>
-          </div>
-          <div class="flex items-center gap-6 mt-10">
-            <div class="flex -space-x-3">
-              <div class="w-10 h-10 rounded-full bg-primary-300 border-2 border-white flex items-center justify-center text-primary-800 font-bold text-sm">A</div>
-              <div class="w-10 h-10 rounded-full bg-primary-400 border-2 border-white flex items-center justify-center text-white font-bold text-sm">M</div>
-              <div class="w-10 h-10 rounded-full bg-primary-500 border-2 border-white flex items-center justify-center text-white font-bold text-sm">J</div>
-              <div class="w-10 h-10 rounded-full bg-primary-200 border-2 border-white flex items-center justify-center text-primary-800 font-bold text-sm">+</div>
-            </div>
-            <div>
-              <div class="flex text-yellow-300 text-sm">
-                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-              </div>
-              <p class="text-sm text-white/80">+2.400 clientes satisfeitos</p>
-            </div>
-          </div>
-        </div>
-        <div class="hidden md:flex justify-center">
-          <div class="relative">
-            <div class="w-80 h-80 bg-white/20 backdrop-blur-sm rounded-3xl flex items-center justify-center shadow-2xl">
-              <div class="text-center">
-                <i class="fas fa-home text-8xl text-white/90 mb-4"></i>
-                <p class="text-xl font-semibold">Casa limpa em<br>poucas horas</p>
-              </div>
-            </div>
-            <div class="absolute -bottom-4 -left-4 bg-white text-primary-700 px-5 py-3 rounded-2xl shadow-xl font-semibold">
-              <i class="fas fa-check-circle text-primary-500 mr-2"></i> Garantia de satisfação
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Serviços -->
-  <section id="servicos" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-14">
-        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Nossos Serviços</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Soluções completas para sua casa</h2>
-        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Escolha o serviço ideal para o seu lar. Todos incluem profissionais capacitados e produtos de qualidade.</p>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Serviço 1 -->
-        <div class="bg-gray-50 rounded-2xl p-8 card-hover border border-gray-100">
-          <div class="service-icon bg-primary-100 text-primary-600 mb-5">
-            <i class="fas fa-spray-can-sparkles"></i>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Limpeza Padrão</h3>
-          <p class="text-gray-600 mb-4">Ideal para manutenção semanal ou quinzenal. Inclui todos os cômodos, banheiros e cozinha.</p>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Aspiração e limpeza de pisos</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Limpeza de banheiros</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Cozinha e eletrodomésticos</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Troca de roupa de cama</li>
-          </ul>
-        </div>
-
-        <!-- Serviço 2 -->
-        <div class="bg-gray-50 rounded-2xl p-8 card-hover border border-gray-100">
-          <div class="service-icon bg-teal-100 text-teal-600 mb-5">
-            <i class="fas fa-sparkles"></i>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Limpeza Profunda</h3>
-          <p class="text-gray-600 mb-4">Limpeza completa e detalhada. Perfeita para mudanças, primavera ou quando a casa precisa de atenção extra.</p>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Tudo da limpeza padrão</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Dentro de armários e gavetas</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Limpeza de janelas e persianas</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Desengordurante de cozinha</li>
-          </ul>
-        </div>
-
-        <!-- Serviço 3 -->
-        <div class="bg-gray-50 rounded-2xl p-8 card-hover border border-gray-100">
-          <div class="service-icon bg-cyan-100 text-cyan-600 mb-5">
-            <i class="fas fa-hard-hat"></i>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Pós-Obra</h3>
-          <p class="text-gray-600 mb-4">Remoção de resíduos de construção, poeira e sujeira pesada após reformas ou construções.</p>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Remoção de entulho leve</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Limpeza de resíduos de obra</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Polimento de pisos</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Higienização completa</li>
-          </ul>
-        </div>
-
-        <!-- Serviço 4 -->
-        <div class="bg-gray-50 rounded-2xl p-8 card-hover border border-gray-100">
-          <div class="service-icon bg-emerald-100 text-emerald-600 mb-5">
-            <i class="fas fa-couch"></i>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Estofados & Colchões</h3>
-          <p class="text-gray-600 mb-4">Higienização profissional de sofás, poltronas, colchões e tapetes com equipamentos especializados.</p>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Extração a vapor</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Remoção de ácaros</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Eliminação de odores</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Proteção antimancha</li>
-          </ul>
-        </div>
-
-        <!-- Serviço 5 -->
-        <div class="bg-gray-50 rounded-2xl p-8 card-hover border border-gray-100">
-          <div class="service-icon bg-sky-100 text-sky-600 mb-5">
-            <i class="fas fa-window-maximize"></i>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Vidros e Fachadas</h3>
-          <p class="text-gray-600 mb-4">Limpeza de janelas, box, espelhos e fachadas de apartamentos e casas.</p>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Janelas internas e externas</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Box e espelhos</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Sem marcas de água</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Produtos específicos</li>
-          </ul>
-        </div>
-
-        <!-- Serviço 6 -->
-        <div class="bg-gray-50 rounded-2xl p-8 card-hover border border-gray-100">
-          <div class="service-icon bg-lime-100 text-lime-600 mb-5">
-            <i class="fas fa-calendar-check"></i>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Limpeza Recorrente</h3>
-          <p class="text-gray-600 mb-4">Planos semanais, quinzenais ou mensais com desconto especial e prioridade no agendamento.</p>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Desconto de até 20%</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Mesmo profissional</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Horário fixo</li>
-            <li><i class="fas fa-check text-primary-500 mr-2"></i>Cancelamento flexível</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Planos / Preços -->
-  <section id="planos" class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-14">
-        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Preços transparentes</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Escolha o plano ideal</h2>
-        <p class="text-gray-500 mt-3 max-w-2xl mx-auto">Valores a partir de. O preço final depende do tamanho da casa e do tipo de serviço.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <!-- Plano Básico -->
-        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 card-hover">
-          <h3 class="text-lg font-semibold text-gray-500 mb-1">Básico</h3>
-          <div class="flex items-baseline gap-1 mb-4">
-            <span class="text-4xl font-extrabold text-gray-900">R$ 149</span>
-            <span class="text-gray-500">/ visita</span>
-          </div>
-          <p class="text-sm text-gray-500 mb-6">Até 2 quartos + sala + cozinha + 1 banheiro</p>
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-500 mr-3"></i>Limpeza padrão</li>
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-500 mr-3"></i>2 profissionais</li>
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-500 mr-3"></i>Duração ~3h</li>
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-500 mr-3"></i>Produtos inclusos</li>
-          </ul>
-          <a href="#agendar" class="block w-full text-center border-2 border-primary-600 text-primary-600 hover:bg-primary-50 py-3 rounded-full font-semibold transition">
-            Selecionar
-          </a>
-        </div>
-
-        <!-- Plano Popular -->
-        <div class="bg-primary-600 text-white rounded-2xl p-8 shadow-xl relative transform md:-translate-y-4">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-900 text-xs font-bold px-4 py-1 rounded-full">
-            MAIS POPULAR
-          </div>
-          <h3 class="text-lg font-semibold text-primary-100 mb-1">Completo</h3>
-          <div class="flex items-baseline gap-1 mb-4">
-            <span class="text-4xl font-extrabold">R$ 249</span>
-            <span class="text-primary-200">/ visita</span>
-          </div>
-          <p class="text-sm text-primary-100 mb-6">Até 3 quartos + áreas sociais + 2 banheiros</p>
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-200 mr-3"></i>Limpeza profunda</li>
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-200 mr-3"></i>3 profissionais</li>
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-200 mr-3"></i>Duração ~5h</li>
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-200 mr-3"></i>Janelas internas</li>
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-200 mr-3"></i>Prioridade no agendamento</li>
-          </ul>
-          <a href="#agendar" class="block w-full text-center bg-white text-primary-700 hover:bg-primary-50 py-3 rounded-full font-bold transition">
-            Selecionar
-          </a>
-        </div>
-
-        <!-- Plano Premium -->
-        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 card-hover">
-          <h3 class="text-lg font-semibold text-gray-500 mb-1">Premium</h3>
-          <div class="flex items-baseline gap-1 mb-4">
-            <span class="text-4xl font-extrabold text-gray-900">R$ 399</span>
-            <span class="text-gray-500">/ visita</span>
-          </div>
-          <p class="text-sm text-gray-500 mb-6">Casas grandes ou limpeza pós-obra</p>
-          <ul class="space-y-3 mb-8">
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-500 mr-3"></i>Limpeza profunda + extras</li>
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-500 mr-3"></i>Equipe completa</li>
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-500 mr-3"></i>Estofados (1 peça)</li>
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-500 mr-3"></i>Vidros externos</li>
-            <li class="flex items-center text-sm"><i class="fas fa-check-circle text-primary-500 mr-3"></i>Garantia estendida</li>
-          </ul>
-          <a href="#agendar" class="block w-full text-center border-2 border-primary-600 text-primary-600 hover:bg-primary-50 py-3 rounded-full font-semibold transition">
-            Selecionar
-          </a>
-        </div>
-      </div>
-
-      <p class="text-center text-sm text-gray-500 mt-8">* Valores aproximados. Orçamento personalizado grátis após análise do imóvel.</p>
-    </div>
-  </section>
-
-  <!-- Como Funciona -->
-  <section id="como-funciona" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-14">
-        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Simples e rápido</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Como funciona</h2>
-      </div>
-
-      <div class="grid md:grid-cols-4 gap-8">
-        <div class="text-center">
-          <div class="w-16 h-16 bg-primary-100 text-primary-600 rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
-          <h3 class="font-bold text-lg mb-2">Agende online</h3>
-          <p class="text-gray-500 text-sm">Preencha o formulário com os detalhes da sua casa e escolha a data preferida.</p>
-        </div>
-        <div class="text-center">
-          <div class="w-16 h-16 bg-primary-100 text-primary-600 rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
-          <h3 class="font-bold text-lg mb-2">Confirmação</h3>
-          <p class="text-gray-500 text-sm">Nossa equipe entra em contato em até 2 horas para confirmar e ajustar detalhes.</p>
-        </div>
-        <div class="text-center">
-          <div class="w-16 h-16 bg-primary-100 text-primary-600 rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
-          <h3 class="font-bold text-lg mb-2">Profissionais no local</h3>
-          <p class="text-gray-500 text-sm">A equipe chega no horário combinado, com todos os produtos e equipamentos.</p>
-        </div>
-        <div class="text-center">
-          <div class="w-16 h-16 bg-primary-100 text-primary-600 rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-4">4</div>
-          <h3 class="font-bold text-lg mb-2">Casa brilhando</h3>
-          <p class="text-gray-500 text-sm">Você recebe a casa limpa e pode avaliar o serviço. Satisfação garantida!</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Depoimentos -->
-  <section id="depoimentos" class="py-20 bg-primary-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-14">
-        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Clientes reais</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">O que dizem sobre nós</h2>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white rounded-2xl p-8 shadow-sm">
-          <div class="flex text-yellow-400 mb-4">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          </div>
-          <p class="text-gray-600 mb-6">“Contratei a limpeza profunda e fiquei impressionada. A equipe foi pontual, educada e a casa ficou impecável. Já virei cliente recorrente!”</p>
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-primary-200 rounded-full flex items-center justify-center font-bold text-primary-700">CS</div>
-            <div>
-              <p class="font-semibold">Camila Santos</p>
-              <p class="text-sm text-gray-500">São Paulo, SP</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-8 shadow-sm">
-          <div class="flex text-yellow-400 mb-4">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          </div>
-          <p class="text-gray-600 mb-6">“Depois da reforma, a limpeza pós-obra salvou minha vida. Removeram toda a poeira e resíduos. Preço justo e resultado excelente.”</p>
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-teal-200 rounded-full flex items-center justify-center font-bold text-teal-700">RO</div>
-            <div>
-              <p class="font-semibold">Rafael Oliveira</p>
-              <p class="text-sm text-gray-500">Curitiba, PR</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-8 shadow-sm">
-          <div class="flex text-yellow-400 mb-4">
-            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-          </div>
-          <p class="text-gray-600 mb-6">“Uso o plano quinzenal há 8 meses. Sempre o mesmo profissional, que já conhece minha casa. Recomendo de olhos fechados!”</p>
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-cyan-200 rounded-full flex items-center justify-center font-bold text-cyan-700">JM</div>
-            <div>
-              <p class="font-semibold">Juliana Mendes</p>
-              <p class="text-sm text-gray-500">Belo Horizonte, MG</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Agendar / Formulário -->
-  <section id="agendar" class="py-20 bg-white">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-10">
-        <span class="text-primary-600 font-semibold text-sm uppercase tracking-wider">Agende agora</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Solicite seu orçamento</h2>
-        <p class="text-gray-500 mt-3">Preencha o formulário e retornaremos em até 2 horas úteis.</p>
-      </div>
-
-      <form id="bookingForm" class="bg-gray-50 rounded-2xl p-8 md:p-10 shadow-sm border border-gray-100">
-        <div class="grid sm:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1.5">Nome completo *</label>
-            <input type="text" name="nome" required
-              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition"
-              placeholder="Seu nome">
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1.5">WhatsApp *</label>
-            <input type="tel" name="telefone" required
-              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition"
-              placeholder="(11) 99999-9999">
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1.5">E-mail</label>
-            <input type="email" name="email"
-              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition"
-              placeholder="seu@email.com">
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1.5">Cidade *</label>
-            <input type="text" name="cidade" required
-              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition"
-              placeholder="Ex: São Paulo">
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1.5">Tipo de serviço *</label>
-            <select name="servico" required
-              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition bg-white">
-              <option value="">Selecione...</option>
-              <option value="padrao">Limpeza Padrão</option>
-              <option value="profunda">Limpeza Profunda</option>
-              <option value="pos-obra">Pós-Obra</option>
-              <option value="estofados">Estofados & Colchões</option>
-              <option value="vidros">Vidros e Fachadas</option>
-              <option value="recorrente">Limpeza Recorrente</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1.5">Tamanho aproximado</label>
-            <select name="tamanho"
-              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition bg-white">
-              <option value="">Selecione...</option>
-              <option value="1-2">1 a 2 quartos</option>
-              <option value="3">3 quartos</option>
-              <option value="4+">4+ quartos / casa grande</option>
-              <option value="kitnet">Kitnet / Studio</option>
-            </select>
-          </div>
-          <div class="sm:col-span-2">
-            <label class="block text-sm font-medium text-gray-700 mb-1.5">Data preferida</label>
-            <input type="date" name="data"
-              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition">
-          </div>
-          <div class="sm:col-span-2">
-            <label class="block text-sm font-medium text-gray-700 mb-1.5">Observações</label>
-            <textarea name="obs" rows="3"
-              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition resize-none"
-              placeholder="Ex: tenho pets, preciso de limpeza de armários, etc."></textarea>
-          </div>
-        </div>
-
-        <button type="submit"
-          class="w-full mt-8 bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 rounded-full transition shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
-          <i class="fas fa-paper-plane"></i>
-          Enviar solicitação
-        </button>
-
-        <p class="text-center text-xs text-gray-400 mt-4">Ao enviar, você concorda em ser contatado via WhatsApp ou e-mail.</p>
-      </form>
-
-      <!-- Success message (hidden by default) -->
-      <div id="successMsg" class="hidden mt-8 bg-green-50 border border-green-200 text-green-800 rounded-2xl p-6 text-center">
-        <i class="fas fa-check-circle text-3xl text-green-500 mb-3"></i>
-        <h3 class="text-xl font-bold mb-2">Solicitação enviada!</h3>
-        <p>Recebemos seus dados. Nossa equipe entrará em contato em breve pelo WhatsApp.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Final -->
-  <section class="py-16 hero-gradient text-white">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Pronto para ter uma casa impecável?</h2>
-      <p class="text-lg text-white/90 mb-8">Mais de 2.400 clientes já confiam no LarLimpo. Agende agora e ganhe 10% de desconto na primeira limpeza.</p>
-      <a href="#agendar" class="inline-block bg-white text-primary-700 hover:bg-primary-50 px-10 py-4 rounded-full font-bold text-lg transition shadow-lg">
-        Quero meu desconto
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <a href="#topo" class="flex items-center gap-2 font-extrabold text-xl">
+      <span class="text-2xl">🧹</span>
+      <span><span class="text-brand-600">Lar</span>Limpo</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-600">
+      <a href="#servicos" class="hover:text-brand-600">Serviços</a>
+      <a href="#planos" class="hover:text-brand-600">Planos</a>
+      <a href="#como" class="hover:text-brand-600">Como funciona</a>
+      <a href="#depoimentos" class="hover:text-brand-600">Depoimentos</a>
+      <a href="#faq" class="hover:text-brand-600">Dúvidas</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20agendar%20uma%20limpeza." target="_blank" rel="noopener"
+         class="hidden sm:inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe57] text-white text-sm font-bold px-4 py-2.5 rounded-xl transition">
+        WhatsApp
       </a>
+      <button id="menuBtn" class="md:hidden p-2 text-slate-700" aria-label="Menu">
+        <svg id="iconOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="iconClose" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-3">
+    <a href="#servicos" class="block py-2 font-semibold text-slate-700">Serviços</a>
+    <a href="#planos" class="block py-2 font-semibold text-slate-700">Planos</a>
+    <a href="#como" class="block py-2 font-semibold text-slate-700">Como funciona</a>
+    <a href="#depoimentos" class="block py-2 font-semibold text-slate-700">Depoimentos</a>
+    <a href="#faq" class="block py-2 font-semibold text-slate-700">Dúvidas</a>
+    <a href="#agendar" class="block text-center bg-brand-600 text-white font-bold py-3 rounded-xl mt-2">Agendar agora</a>
+  </div>
+</header>
+
+<main id="topo">
+<!-- HERO -->
+  <section class="hero-bg pt-16 pb-20 md:pt-24 md:pb-28">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="inline-block text-xs font-bold tracking-wider uppercase bg-brand-100 text-brand-700 px-3 py-1.5 rounded-full">Limpeza residencial profissional</span>
+        <h1 class="mt-5 text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
+          Sua casa limpa,<br><span class="text-brand-600">sem dor de cabeça</span>
+        </h1>
+        <p class="mt-5 text-lg text-slate-600 max-w-md">
+          Equipe treinada, produtos inclusos e agendamento em minutos pelo WhatsApp. Planos a partir de <strong class="text-slate-900">R$ 120</strong>.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#agendar" class="inline-flex items-center justify-center bg-brand-600 hover:bg-brand-700 text-white font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-brand-600/25 transition">Agendar agora</a>
+          <a href="#servicos" class="inline-flex items-center justify-center border-2 border-brand-600 text-brand-700 hover:bg-brand-50 font-bold px-7 py-3.5 rounded-xl transition">Ver serviços</a>
+        </div>
+        <div class="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-500">
+          <div><span class="font-bold text-slate-900">+2.000</span> limpezas</div>
+          <div><span class="font-bold text-slate-900">4,9★</span> no Google</div>
+          <div><span class="font-bold text-slate-900">100%</span> produtos inclusos</div>
+        </div>
+      </div>
+      <div class="bg-gradient-to-br from-brand-700 to-brand-800 text-white rounded-2xl p-7 shadow-2xl">
+        <div class="text-sm text-brand-200">Exemplo de orçamento</div>
+        <div class="mt-1 text-2xl font-extrabold">Limpeza Padrão · 80 m²</div>
+        <div class="mt-5 space-y-2.5 text-sm">
+          <div class="flex justify-between border-b border-white/15 pb-2"><span>Mão de obra</span><span class="font-semibold">R$ 140</span></div>
+          <div class="flex justify-between border-b border-white/15 pb-2"><span>Produtos e materiais</span><span class="font-semibold">Incluso</span></div>
+          <div class="flex justify-between border-b border-white/15 pb-2"><span>Deslocamento</span><span class="font-semibold">Grátis</span></div>
+          <div class="flex justify-between pt-1 text-lg font-extrabold"><span>Total</span><span>R$ 140</span></div>
+        </div>
+        <a href="#agendar" class="mt-6 block text-center bg-[#25D366] hover:bg-[#1ebe57] text-white font-bold py-3.5 rounded-xl transition">Quero esse preço →</a>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-300 py-14">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-4 gap-10">
-        <div>
-          <div class="flex items-center gap-2 mb-4">
-            <div class="w-9 h-9 bg-primary-600 rounded-lg flex items-center justify-center">
-              <i class="fas fa-broom text-white"></i>
-            </div>
-            <span class="text-xl font-bold text-white">Lar<span class="text-primary-400">Limpo</span></span>
-          </div>
-          <p class="text-sm text-gray-400">Serviços profissionais de limpeza residencial com qualidade, pontualidade e respeito ao seu lar.</p>
-        </div>
-        <div>
-          <h4 class="font-semibold text-white mb-4">Serviços</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#servicos" class="hover:text-primary-400 transition">Limpeza Padrão</a></li>
-            <li><a href="#servicos" class="hover:text-primary-400 transition">Limpeza Profunda</a></li>
-            <li><a href="#servicos" class="hover:text-primary-400 transition">Pós-Obra</a></li>
-            <li><a href="#servicos" class="hover:text-primary-400 transition">Estofados</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-semibold text-white mb-4">Empresa</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#como-funciona" class="hover:text-primary-400 transition">Como funciona</a></li>
-            <li><a href="#depoimentos" class="hover:text-primary-400 transition">Depoimentos</a></li>
-            <li><a href="#planos" class="hover:text-primary-400 transition">Planos e preços</a></li>
-            <li><a href="#agendar" class="hover:text-primary-400 transition">Contato</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-semibold text-white mb-4">Contato</h4>
-          <ul class="space-y-3 text-sm">
-            <li class="flex items-center gap-2"><i class="fab fa-whatsapp text-primary-400"></i> (11) 99999-8888</li>
-            <li class="flex items-center gap-2"><i class="fas fa-envelope text-primary-400"></i> contato@larlimpo.com.br</li>
-            <li class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-primary-400"></i> Atendemos toda a região</li>
-          </ul>
-          <div class="flex gap-3 mt-5">
-            <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-primary-600 rounded-lg flex items-center justify-center transition"><i class="fab fa-whatsapp"></i></a>
-          </div>
-        </div>
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center max-w-2xl mx-auto">
+        <span class="text-xs font-bold tracking-wider uppercase text-brand-600">Serviços</span>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight">Tudo que sua casa precisa</h2>
+        <p class="mt-3 text-slate-500">Do dia a dia à limpeza pesada — cobrimos tudo com a mesma qualidade.</p>
       </div>
-      <div class="border-t border-gray-800 mt-10 pt-8 text-center text-sm text-gray-500">
-        © 2026 LarLimpo. Todos os direitos reservados. | App de demonstração
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="card bg-white border border-slate-200 rounded-2xl p-7"><div class="text-3xl">🏠</div><h3 class="mt-4 font-bold text-lg">Limpeza Padrão</h3><p class="mt-2 text-sm text-slate-500">Cozinha, banheiros, quartos, aspiração e organização geral. Ideal para a rotina semanal.</p></article>
+        <article class="card bg-white border border-slate-200 rounded-2xl p-7"><div class="text-3xl">✨</div><h3 class="mt-4 font-bold text-lg">Limpeza Profunda</h3><p class="mt-2 text-sm text-slate-500">Armários, forno, geladeira por fora, rodapés, janelas internas e cantos esquecidos.</p></article>
+        <article class="card bg-white border border-slate-200 rounded-2xl p-7"><div class="text-3xl">🧱</div><h3 class="mt-4 font-bold text-lg">Pós-Obra</h3><p class="mt-2 text-sm text-slate-500">Remoção de resíduos de construção, poeira fina e acabamento para entrega da obra.</p></article>
+        <article class="card bg-white border border-slate-200 rounded-2xl p-7"><div class="text-3xl">🛋️</div><h3 class="mt-4 font-bold text-lg">Estofados & Colchões</h3><p class="mt-2 text-sm text-slate-500">Higienização com extratora, remoção de ácaros, manchas e odores.</p></article>
+        <article class="card bg-white border border-slate-200 rounded-2xl p-7"><div class="text-3xl">🪟</div><h3 class="mt-4 font-bold text-lg">Vidros e Fachadas</h3><p class="mt-2 text-sm text-slate-500">Janelas, box, espelhos e fachadas com acabamento impecável, sem riscos.</p></article>
+        <article class="card bg-white border border-slate-200 rounded-2xl p-7"><div class="text-3xl">🔄</div><h3 class="mt-4 font-bold text-lg">Limpeza Recorrente</h3><p class="mt-2 text-sm text-slate-500">Semanal, quinzenal ou mensal, com desconto progressivo e equipe fixa.</p></article>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <script>
-    // Mobile menu toggle
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-      const icon = menuBtn.querySelector('i');
-      icon.classList.toggle('fa-bars');
-      icon.classList.toggle('fa-times');
+  <!-- PLANOS -->
+  <section id="planos" class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center max-w-2xl mx-auto">
+        <span class="text-xs font-bold tracking-wider uppercase text-brand-600">Planos</span>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight">Preços transparentes</h2>
+        <p class="mt-3 text-slate-500">Valores de referência. Orçamento exato no WhatsApp em minutos.</p>
+      </div>
+      <div class="mt-12 grid md:grid-cols-3 gap-6 items-stretch">
+        <article class="card bg-white border border-slate-200 rounded-2xl p-7 flex flex-col">
+          <h3 class="font-bold text-lg text-slate-500">Básico</h3>
+          <div class="mt-3 text-4xl font-extrabold tracking-tight">R$ 120 <span class="text-base font-semibold text-slate-400">/visita</span></div>
+          <ul class="check mt-5 text-sm text-slate-600 flex-1"><li>Limpeza padrão</li><li>Produtos inclusos</li><li>Até 60 m²</li><li>Agendamento flexível</li></ul>
+          <a href="#agendar" class="mt-6 block text-center border-2 border-brand-600 text-brand-700 hover:bg-brand-50 font-bold py-3 rounded-xl transition">Escolher</a>
+        </article>
+        <article class="card bg-white border-2 border-brand-600 rounded-2xl p-7 flex flex-col relative shadow-xl shadow-brand-600/10">
+          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full">Mais popular</span>
+          <h3 class="font-bold text-lg text-brand-700">Completo</h3>
+          <div class="mt-3 text-4xl font-extrabold tracking-tight">R$ 190 <span class="text-base font-semibold text-slate-400">/visita</span></div>
+          <ul class="check mt-5 text-sm text-slate-600 flex-1"><li>Limpeza profunda</li><li>Produtos inclusos</li><li>Até 100 m²</li><li>Equipe de 2 pessoas</li><li>Desconto em recorrência</li></ul>
+          <a href="#agendar" class="mt-6 block text-center bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl transition">Escolher</a>
+        </article>
+        <article class="card bg-white border border-slate-200 rounded-2xl p-7 flex flex-col">
+          <h3 class="font-bold text-lg text-slate-500">Premium</h3>
+          <div class="mt-3 text-4xl font-extrabold tracking-tight">R$ 290 <span class="text-base font-semibold text-slate-400">/visita</span></div>
+          <ul class="check mt-5 text-sm text-slate-600 flex-1"><li>Limpeza profunda + estofados</li><li>Produtos inclusos</li><li>Até 150 m²</li><li>Equipe de 3 pessoas</li><li>Prioridade no agendamento</li></ul>
+          <a href="#agendar" class="mt-6 block text-center border-2 border-brand-600 text-brand-700 hover:bg-brand-50 font-bold py-3 rounded-xl transition">Escolher</a>
+        </article>
+      </div>
+    </div>
+  </section>
+<!-- COMO FUNCIONA -->
+  <section id="como" class="py-20 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center">
+        <span class="text-xs font-bold tracking-wider uppercase text-brand-600">Como funciona</span>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight">Simples em 4 passos</h2>
+      </div>
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 text-center">
+          <div class="text-4xl font-extrabold text-brand-600">1</div>
+          <h3 class="mt-3 font-bold">Escolha o serviço</h3>
+          <p class="mt-2 text-sm text-slate-500">Padrão, profunda, pós-obra e mais.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 text-center">
+          <div class="text-4xl font-extrabold text-brand-600">2</div>
+          <h3 class="mt-3 font-bold">Mande no WhatsApp</h3>
+          <p class="mt-2 text-sm text-slate-500">Endereço, metragem e data preferida.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 text-center">
+          <div class="text-4xl font-extrabold text-brand-600">3</div>
+          <h3 class="mt-3 font-bold">Receba o orçamento</h3>
+          <p class="mt-2 text-sm text-slate-500">Resposta em até 1 hora, sem compromisso.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 text-center">
+          <div class="text-4xl font-extrabold text-brand-600">4</div>
+          <h3 class="mt-3 font-bold">Aprove e relaxe</h3>
+          <p class="mt-2 text-sm text-slate-500">A equipe chega no horário combinado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos" class="py-20">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center">
+        <span class="text-xs font-bold tracking-wider uppercase text-brand-600">Depoimentos</span>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight">Quem já contratou, recomenda</h2>
+      </div>
+      <div class="mt-12 grid md:grid-cols-3 gap-6">
+        <figure class="bg-white border border-slate-200 rounded-2xl p-7">
+          <div class="text-amber-400 text-lg tracking-wide">★★★★★</div>
+          <blockquote class="mt-3 text-sm text-slate-600">“Fizeram a limpeza profunda antes de uma visita da família. Ficou impecável e no preço combinado.”</blockquote>
+          <figcaption class="mt-4 text-sm font-bold">Ana Paula · São Paulo</figcaption>
+        </figure>
+        <figure class="bg-white border border-slate-200 rounded-2xl p-7">
+          <div class="text-amber-400 text-lg tracking-wide">★★★★★</div>
+          <blockquote class="mt-3 text-sm text-slate-600">“Contratei o plano mensal e nunca mais pensei em limpar. Equipe sempre a mesma, pontual.”</blockquote>
+          <figcaption class="mt-4 text-sm font-bold">Ricardo · Campinas</figcaption>
+        </figure>
+        <figure class="bg-white border border-slate-200 rounded-2xl p-7">
+          <div class="text-amber-400 text-lg tracking-wide">★★★★★</div>
+          <blockquote class="mt-3 text-sm text-slate-600">“Limpeza pós-obra em apartamento de 90 m². Saíram com tudo novinho em folha no mesmo dia.”</blockquote>
+          <figcaption class="mt-4 text-sm font-bold">Fernanda · Santos</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-20 bg-slate-50">
+    <div class="max-w-2xl mx-auto px-4">
+      <div class="text-center">
+        <span class="text-xs font-bold tracking-wider uppercase text-brand-600">Dúvidas</span>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight">Perguntas frequentes</h2>
+      </div>
+      <div class="mt-10 space-y-3">
+        **Summary:**
+Os produtos estão inclusos no preço? <span class="text-brand-600 group-open:rotate-45 transition">+</span>
+          <p class="mt-3 text-sm text-slate-500">Sim. Detergente, desinfetante, álcool, panos e materiais básicos já vêm no valor. Produtos ecológicos ou hipoalergênicos podem ter acréscimo — avisamos no orçamento.</p>
+        **Summary:**
+Vocês atendem fins de semana? <span class="text-brand-600 group-open:rotate-45 transition">+</span>
+          <p class="mt-3 text-sm text-slate-500">Atendemos sábado e, em alguns planos, domingo. O valor pode variar — confirme no WhatsApp.</p>
+        **Summary:**
+Como cancelar o plano recorrente? <span class="text-brand-600 group-open:rotate-45 transition">+</span>
+          <p class="mt-3 text-sm text-slate-500">Sem fidelidade. Cancele quando quiser, com aviso de 48 horas antes da próxima visita.</p>
+        **Summary:**
+Preciso estar em casa durante a limpeza? <span class="text-brand-600 group-open:rotate-45 transition">+</span>
+          <p class="mt-3 text-sm text-slate-500">Não é obrigatório. Muitos clientes deixam a chave com vizinho ou portaria. Só avisamos no agendamento.</p>
+        **Summary:**
+Emitem nota fiscal? <span class="text-brand-600 group-open:rotate-45 transition">+</span>
+          <p class="mt-3 text-sm text-slate-500">Sim, para pessoa física e jurídica, mediante solicitação.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGENDAR -->
+  <section id="agendar" class="py-20">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-start">
+      <div>
+        <span class="text-xs font-bold tracking-wider uppercase text-brand-600">Agendamento</span>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold tracking-tight">Peça seu orçamento grátis</h2>
+        <p class="mt-3 text-slate-500">Preencha o formulário ou chame direto no WhatsApp. Resposta em até 1 hora.</p>
+        <ul class="check mt-6 text-sm text-slate-600">
+          <li>Sem compromisso</li>
+          <li>Orçamento em até 1 hora</li>
+          <li>Equipe fixa e identificada</li>
+          <li>Cancelamento grátis até 24h antes</li>
+        </ul>
+        <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20um%20or%C3%A7amento%20de%20limpeza." target="_blank" rel="noopener"
+           class="mt-8 inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe57] text-white font-bold text-lg px-7 py-3.5 rounded-xl transition">
+          💬 Chamar no WhatsApp
+        </a>
+      </div>
+      <form id="formAgendar" class="bg-white border border-slate-200 rounded-2xl p-7 shadow-sm" onsubmit="return enviarForm(event)">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm font-semibold" for="nome">Nome</label>
+            <input id="nome" required class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Seu nome">
+          </div>
+          <div>
+            <label class="text-sm font-semibold" for="whatsapp">WhatsApp</label>
+            <input id="whatsapp" required class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="(11) 90000-0000">
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="text-sm font-semibold" for="servico">Serviço</label>
+          <select id="servico" class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+            <option>Limpeza Padrão</option>
+            <option>Limpeza Profunda</option>
+            <option>Pós-Obra</option>
+            <option>Estofados & Colchões</option>
+            <option>Vidros e Fachadas</option>
+            <option>Limpeza Recorrente</option>
+          </select>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4 mt-4">
+          <div>
+            <label class="text-sm font-semibold" for="metragem">Metragem (m²)</label>
+            <input id="metragem" type="number" min="20" class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="Ex: 80">
+          </div>
+          <div>
+            <label class="text-sm font-semibold" for="data">Data preferida</label>
+            <input id="data" type="date" class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="text-sm font-semibold" for="msg">Mensagem (opcional)</label>
+          <textarea id="msg" rows="3" class="mt-1 w-full border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none" placeholder="Detalhes da casa, acessos, observações..."></textarea>
+        </div>
+        <button type="submit" class="w-full mt-6 bg-brand-600 hover:bg-brand-700 text-white font-bold py-3.5 rounded-xl transition">Enviar pedido</button>
+        <p id="formMsg" class="mt-3 text-sm text-center text-slate-500"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-slate-900 text-slate-400 py-14">
+  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-4 gap-10">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-2 font-extrabold text-xl text-white"><span>🧹</span> LarLimpo</div>
+      <p class="mt-4 text-sm max-w-sm">Limpeza residencial profissional com agendamento simples e preços transparentes. Cuidamos da sua casa como se fosse a nossa.</p>
+    </div>
+    <div>
+      <h4 class="font-bold text-white mb-3">Serviços</h4>
+      <ul class="text-sm space-y-2">
+        <li><a href="#servicos" class="hover:text-white">Limpeza Padrão</a></li>
+        <li><a href="#servicos" class="hover:text-white">Limpeza Profunda</a></li>
+        <li><a href="#servicos" class="hover:text-white">Pós-Obra</a></li>
+        <li><a href="#servicos" class="hover:text-white">Recorrente</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-bold text-white mb-3">Contato</h4>
+      <ul class="text-sm space-y-2">
+        <li>📞 (11) 4002-8922</li>
+        <li>💬 WhatsApp: (11) 9 9999-9999</li>
+        <li>✉️ contato@larlimpo.com.br</li>
+        <li>📍 Região metropolitana de SP</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto px-4 mt-10 pt-6 border-t border-slate-800 text-xs flex flex-wrap justify-between gap-2">
+    <span>© 2026 LarLimpo. Todos os direitos reservados.</span>
+    <span>Feito com ❤️ para casas mais limpas.</span>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20agendar%20uma%20limpeza." target="_blank" rel="noopener"
+     class="block w-full text-center bg-[#25D366] hover:bg-[#1ebe57] text-white font-bold py-3.5 rounded-xl transition">
+    💬 Agendar pelo WhatsApp
+  </a>
+</div>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const iconOpen = document.getElementById('iconOpen');
+  const iconClose = document.getElementById('iconClose');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    iconOpen.classList.toggle('hidden');
+    iconClose.classList.toggle('hidden');
+  });
+  document.querySelectorAll('#mobileMenu a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
     });
-
-    // Close mobile menu on link click
-    document.querySelectorAll('#mobileMenu a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        const icon = menuBtn.querySelector('i');
-        icon.classList.add('fa-bars');
-        icon.classList.remove('fa-times');
-      });
-    });
-
-    // Navbar shadow on scroll
-    window.addEventListener('scroll', () => {
-      const navbar = document.getElementById('navbar');
-      if (window.scrollY > 20) {
-        navbar.classList.add('shadow-md');
-      } else {
-        navbar.classList.remove('shadow-md');
-      }
-    });
-
-    // Form submission
-    const form = document.getElementById('bookingForm');
-    const successMsg = document.getElementById('successMsg');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      // Simulate sending
-      form.classList.add('opacity-50', 'pointer-events-none');
-      setTimeout(() => {
-        form.classList.add('hidden');
-        successMsg.classList.remove('hidden');
-        // Scroll to success
-        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 800);
-    });
-
-    // Set min date to today
-    const dateInput = document.querySelector('input[name="data"]');
-    if (dateInput) {
-      const today = new Date().toISOString().split('T')[0];
-      dateInput.setAttribute('min', today);
-    }
-  </script>
+  });
+  function enviarForm(e) {
+    e.preventDefault();
+    const nome = document.getElementById('nome').value.trim();
+    const wa = document.getElementById('whatsapp').value.trim();
+    const servico = document.getElementById('servico').value;
+    const met = document.getElementById('metragem').value;
+    const data = document.getElementById('data').value;
+    const msg = document.getElementById('msg').value.trim();
+    const texto = 'Olá! Quero um orçamento LarLimpo.%0A' +
+      'Nome: ' + nome + '%0A' +
+      'WhatsApp: ' + wa + '%0A' +
+      'Serviço: ' + servico + '%0A' +
+      'Metragem: ' + (met || 'não informada') + ' m²%0A' +
+      'Data preferida: ' + (data || 'a combinar') + '%0A' +
+      (msg ? 'Mensagem: ' + msg : '');
+    const link = 'https://wa.me/5511999999999?text=' + texto;
+    const m = document.getElementById('formMsg');
+    m.style.color = '#0d9488';
+    m.textContent = 'Perfeito, ' + nome.split(' ')[0] + '! Abrindo o WhatsApp...';
+    setTimeout(() => window.open(link, '_blank'), 600);
+    return false;
+  }
+  const d = document.getElementById('data');
+  if (d) d.min = new Date().toISOString().slice(0, 10);
+</script>
 </body>
 </html>
